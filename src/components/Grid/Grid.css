@@ -1,0 +1,7 @@
+.grid-container {
+  display: flex;
+}
+
+.grid-column {
+  background: lightblue;
+}
