@@ -1,6 +1,11 @@
 .cell-container {
-  margin: 1em;
+  padding: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 2px solid #424242;
+}
+
+.cell-container:last-child {
+  border: none;
 }

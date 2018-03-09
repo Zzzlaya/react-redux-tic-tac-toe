@@ -1,6 +1,21 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+
 .app-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-flow: column nowrap;
   margin: 2em 1em;
+  font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua',
+    Georgia, serif;
+  font-size: 22px;
+  line-height: 20px;
 }

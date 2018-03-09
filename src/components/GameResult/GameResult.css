@@ -1,0 +1,9 @@
+.game-result-container {
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em;
+  text-decoration: underline overline #9acd32;
+  font-weight: bold;
+}

@@ -7,6 +7,8 @@ class Grid extends Component {
   constructor(props) {
     super(props);
 
+    console.log('props.gridData', props.gridData);
+
     this.generateCellsMatrix(props);
   }
 
@@ -49,7 +51,11 @@ class Grid extends Component {
   }
 
   render() {
-    return <div className="grid-container">{this.renderColumns()}</div>;
+    return (
+      <div className="grid-wrapper">
+        <div className="grid-container">{this.renderColumns()}</div>
+      </div>
+    );
   }
 }
 
@@ -72,7 +78,12 @@ class Column extends Component {
 
     return gridData.reduce((acc, el, i) => {
       acc.push(
-        <Cell colIndex={colIndex} rowIndex={i} value={gridData[i][colIndex]} />
+        <Cell
+          key={i}
+          colIndex={colIndex}
+          rowIndex={i}
+          value={gridData[i][colIndex]}
+        />
       );
 
       return acc;

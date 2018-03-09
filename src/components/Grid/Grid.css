@@ -3,5 +3,9 @@
 }
 
 .grid-column {
-  background: lightblue;
+  border-right: 2px solid #424242;
+}
+
+.grid-column:last-child {
+  border: none;
 }
