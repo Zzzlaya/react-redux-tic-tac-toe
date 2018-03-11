@@ -1,9 +1,10 @@
-const initialState = {
-  gridData: []
-};
+import { combineReducers } from 'redux';
+import gridReducer from './GridReducer';
+import gameResultReducer from './GameResultReducer';
 
-function reducer(state = initialState) {
-  return state;
-}
+const reducer = combineReducers({
+  gridReducer,
+  gameResultReducer
+});
 
 export default reducer;

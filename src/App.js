@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import GridContainer from './containers/GridContainer';
+import ResetButtonContainer from './containers/ResetButtonContainer';
 import Cell from './components/Cell/Cell';
-import Button from './components/Button/Button.js';
-import GameResult from './components/GameResult/GameResult.js';
+import Footer from './components/Footer/Footer';
+import GameResult from './components/GameResult/GameResult';
 
 class App extends Component {
   render() {
@@ -13,18 +14,15 @@ class App extends Component {
         <p>Click on any cell to start</p>
         <GridContainer
           rowsCount={3}
-          columnsCount={3}
+          colsCount={3}
           cellComponent={({ ...props }) => <Cell {...props} />}
         />
-        <GameResult />
-        <div>
-          <Button
-            text="Reset"
-            onClick={() => {
-              console.log('clicked');
-            }}
-          />
-        </div>
+        <Footer>
+          <GameResult />
+          <div>
+            <ResetButtonContainer />
+          </div>
+        </Footer>
       </div>
     );
   }

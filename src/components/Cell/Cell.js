@@ -4,16 +4,35 @@ import PropTypes from 'prop-types';
 import './Cell.css';
 
 class Cell extends Component {
+  onClickHandler = () => {
+    const { rowIndex, colIndex, locked, onClick } = this.props;
+
+    if (locked) {
+      return null;
+    }
+
+    onClick({ rowIndex, colIndex });
+  };
+
   render() {
-    const { rowIndex, colIndex } = this.props;
+    const lockedClassName = this.props.locked ? 'cell-container--locked' : '';
 
     return (
-      <div className="cell-container">
-        {rowIndex}
-        {colIndex}
+      <div
+        className={`cell-container ${lockedClassName}`}
+        onClick={this.onClickHandler}>
+        {this.props.value}
       </div>
     );
   }
 }
+
+Cell.propTypes = {
+  rowIndex: PropTypes.number,
+  colIndex: PropTypes.number,
+  value: PropTypes.string,
+  locked: PropTypes.bool,
+  onClick: PropTypes.func
+};
 
 export default Cell;

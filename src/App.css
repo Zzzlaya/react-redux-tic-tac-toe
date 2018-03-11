@@ -8,6 +8,10 @@ h1 {
   font-size: 1.8em;
 }
 
+p {
+  margin: 1em 0 1.5em;
+}
+
 .app-container {
   display: flex;
   align-items: center;

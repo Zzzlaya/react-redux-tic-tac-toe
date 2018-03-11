@@ -4,44 +4,26 @@ import PropTypes from 'prop-types';
 import './Grid.css';
 
 class Grid extends Component {
-  constructor(props) {
-    super(props);
-
-    console.log('props.gridData', props.gridData);
-
-    this.generateCellsMatrix(props);
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps.gridData', nextProps.gridData);
   }
 
-  generateCellsMatrix(props) {
-    const { rowsCount, columnsCount } = props;
-    this.gridData = [];
+  componentDidMount() {
+    const { rowsCount, colsCount } = this.props;
 
-    for (let i = 0; i < rowsCount; i++) {
-      const row = [];
-
-      for (let j = 0; j < columnsCount; j++) {
-        row.push(0);
-      }
-
-      this.gridData.push(row);
-    }
-
-    // save this data to a state later
-  }
-
-  generateCells() {
-    return;
+    this.props.onGridLoad({ rowsCount, colsCount });
   }
 
   renderColumns() {
     let columns = [];
 
-    for (let i = 0; i < this.gridData[0].length; i++) {
+    for (let i = 0; i < this.props.gridData[0].length; i++) {
       columns.push(
         <Column
           key={i}
           colIndex={i}
-          gridData={this.gridData}
+          onCellClick={this.props.onCellClick}
+          gridData={this.props.gridData}
           cellComponent={this.props.cellComponent}
         />
       );
@@ -51,6 +33,10 @@ class Grid extends Component {
   }
 
   render() {
+    if (!this.props.gridData.length) {
+      return null;
+    }
+
     return (
       <div className="grid-wrapper">
         <div className="grid-container">{this.renderColumns()}</div>
@@ -61,14 +47,16 @@ class Grid extends Component {
 
 Grid.defaultProps = {
   rowsCount: 1,
-  columnsCount: 1,
-  cellComponent: () => {}
+  colsCount: 1,
+  cellComponent: () => {},
+  onCellClick: () => {}
 };
 
 Grid.propTypes = {
   rowsCount: PropTypes.number,
-  columnsCount: PropTypes.number,
-  cellComponent: PropTypes.func
+  colsCount: PropTypes.number,
+  cellComponent: PropTypes.func,
+  onCellClick: PropTypes.func
 };
 
 class Column extends Component {
@@ -82,7 +70,9 @@ class Column extends Component {
           key={i}
           colIndex={colIndex}
           rowIndex={i}
-          value={gridData[i][colIndex]}
+          value={gridData[i][colIndex].value}
+          locked={gridData[i][colIndex].locked}
+          onClick={this.props.onCellClick}
         />
       );
 
