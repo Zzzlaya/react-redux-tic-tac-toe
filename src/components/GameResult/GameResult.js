@@ -4,16 +4,18 @@ import './GameResult.css';
 
 class GameResult extends PureComponent {
   render() {
-    return <div className="game-result-container">{this.props.text}</div>;
+    const text = this.props.isWinner ? 'You won!' : '';
+
+    return <div className="game-result-container">{text}</div>;
   }
 }
 
 GameResult.defaultProps = {
-  text: ''
+  isWinner: false
 };
 
 GameResult.propTypes = {
-  text: PropTypes.string
+  isWinner: PropTypes.bool
 };
 
 export default GameResult;

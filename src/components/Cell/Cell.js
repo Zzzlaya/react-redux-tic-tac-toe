@@ -16,10 +16,11 @@ class Cell extends Component {
 
   render() {
     const lockedClassName = this.props.locked ? 'cell-container--locked' : '';
+    const winnerClassName = this.props.winner ? 'cell-container--winner' : '';
 
     return (
       <div
-        className={`cell-container ${lockedClassName}`}
+        className={`cell-container ${lockedClassName} ${winnerClassName}`}
         onClick={this.onClickHandler}>
         {this.props.value}
       </div>
@@ -32,6 +33,7 @@ Cell.propTypes = {
   colIndex: PropTypes.number,
   value: PropTypes.string,
   locked: PropTypes.bool,
+  winner: PropTypes.bool,
   onClick: PropTypes.func
 };
 

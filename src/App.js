@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import GridContainer from './containers/GridContainer';
 import ResetButtonContainer from './containers/ResetButtonContainer';
+import GameResultContainer from './containers/GameResultContainer';
 import Cell from './components/Cell/Cell';
 import Footer from './components/Footer/Footer';
-import GameResult from './components/GameResult/GameResult';
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
           cellComponent={({ ...props }) => <Cell {...props} />}
         />
         <Footer>
-          <GameResult />
+          <GameResultContainer />
           <div>
             <ResetButtonContainer />
           </div>

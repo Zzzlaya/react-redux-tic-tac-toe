@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 import './Grid.css';
 
 class Grid extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log('nextProps.gridData', nextProps.gridData);
-  }
-
   componentDidMount() {
     const { rowsCount, colsCount } = this.props;
 
@@ -72,6 +68,7 @@ class Column extends Component {
           rowIndex={i}
           value={gridData[i][colIndex].value}
           locked={gridData[i][colIndex].locked}
+          winner={gridData[i][colIndex].winner}
           onClick={this.props.onCellClick}
         />
       );
@@ -81,8 +78,6 @@ class Column extends Component {
   }
 
   render() {
-    const { colIndex, gridData } = this.props;
-
     return <div className="grid-column">{this.renderCells()}</div>;
   }
 }

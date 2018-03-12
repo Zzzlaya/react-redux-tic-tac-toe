@@ -17,3 +17,7 @@
 .cell-container--locked {
   cursor: inherit;
 }
+
+.cell-container--winner {
+  background: #9acd32;
+}

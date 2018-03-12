@@ -2,7 +2,7 @@ const CellSymbols = {
   symbolX: 'X',
   symbolO: 'O'
 };
-let nextCellSymbol = CellSymbols.symbolX;
+let nextCellSymbol = CellSymbols.symbolO;
 
 const getNextCellSymbol = () => {
   if (nextCellSymbol === CellSymbols.symbolX) {
