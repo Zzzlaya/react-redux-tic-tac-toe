@@ -7,7 +7,7 @@ class Cell extends Component {
   onClickHandler = () => {
     const { rowIndex, colIndex, locked, onClick } = this.props;
 
-    if (locked) {
+    if (locked || !onClick) {
       return null;
     }
 
