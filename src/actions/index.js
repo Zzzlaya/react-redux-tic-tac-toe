@@ -31,10 +31,19 @@ const setCellState = ({ rowIndex, colIndex }) => {
   };
 };
 
+const calcGameResult = ({ rowIndex, colIndex }) => {
+  return {
+    type: 'CALC_GAME_RESULT',
+    rowIndex,
+    colIndex,
+    symbol: nextCellSymbol
+  };
+};
+
 const resetGrid = () => {
   return {
     type: 'RESET_GRID'
   };
 };
 
-export { initGrid, setCellState, resetGrid, CellSymbols };
+export { initGrid, setCellState, calcGameResult, resetGrid, CellSymbols };

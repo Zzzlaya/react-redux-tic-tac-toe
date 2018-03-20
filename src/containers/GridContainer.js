@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { initGrid, setCellState } from '../actions';
+import { initGrid, setCellState, calcGameResult } from '../actions';
 import Grid from '../components/Grid/Grid';
 
 const mapStateToProps = state => ({
@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => {
     },
     onCellClick: ({ rowIndex, colIndex }) => {
       dispatch(setCellState({ rowIndex, colIndex }));
+      dispatch(calcGameResult({ rowIndex, colIndex }));
     }
   };
 };

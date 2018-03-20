@@ -20,33 +20,30 @@ const gridReducer = (state = [], action) => {
       return [...state, ...gridData];
     case 'RESET_GRID':
       return state.map(gridRow =>
-        gridRow.map(cell => ({ value: '', locked: false }))
+        gridRow.map(cell => ({ value: '', locked: false, winner: false }))
       );
     case 'SET_CELL_STATE':
-      const { rowIndex, colIndex, symbol } = action;
-
-      let newGridState = state.map((gridRow, i) => {
-        if (i === rowIndex) {
+      return state.map((gridRow, i) => {
+        if (i === action.rowIndex) {
           return gridRow.map((cell, j) => {
-            return j === colIndex
-              ? { ...cell, locked: true, value: symbol }
+            return j === action.colIndex
+              ? { ...cell, locked: true, value: action.symbol }
               : cell;
           });
         }
         return gridRow;
       });
-
-      // calc game result (should be moved to some Util)
+    case 'CALC_GAME_RESULT':
+      const { rowIndex, colIndex, symbol } = action;
       // row
       let winnerRow = true;
-      for (let i = 0; i < newGridState[rowIndex].length; i++) {
-        if (newGridState[rowIndex][i].value !== symbol) {
+      for (let i = 0; i < state[rowIndex].length; i++) {
+        if (state[rowIndex][i].value !== symbol) {
           winnerRow = winnerRow && false;
         }
       }
-
       if (winnerRow) {
-        return newGridState.map((gridRow, i) => {
+        return state.map((gridRow, i) => {
           if (i === rowIndex) {
             return gridRow.map((cell, j) => {
               return { ...cell, winner: true, locked: true };
@@ -59,14 +56,14 @@ const gridReducer = (state = [], action) => {
       }
       // col
       let winnerCol = true;
-      for (let i = 0; i < newGridState.length; i++) {
-        if (newGridState[i][colIndex].value !== symbol) {
+      for (let i = 0; i < state.length; i++) {
+        if (state[i][colIndex].value !== symbol) {
           winnerCol = winnerCol && false;
         }
       }
 
       if (winnerCol) {
-        return newGridState.map((gridRow, i) => {
+        return state.map((gridRow, i) => {
           return gridRow.map((cell, j) => {
             if (j === colIndex) {
               return { ...cell, winner: true, locked: true };
@@ -78,14 +75,14 @@ const gridReducer = (state = [], action) => {
 
       // diag left right
       let winnerDiagLeftRight = true;
-      for (let i = 0; i < newGridState.length; i++) {
-        if (newGridState[i][i].value !== symbol) {
+      for (let i = 0; i < state.length; i++) {
+        if (state[i][i].value !== symbol) {
           winnerDiagLeftRight = winnerDiagLeftRight && false;
         }
       }
 
       if (winnerDiagLeftRight) {
-        return newGridState.map((gridRow, i) => {
+        return state.map((gridRow, i) => {
           return gridRow.map((cell, j) => {
             if (j === i) {
               return { ...cell, winner: true, locked: true };
@@ -97,14 +94,14 @@ const gridReducer = (state = [], action) => {
 
       // diag right left
       let winnerDiagRightLeft = true;
-      for (let i = 0; i < newGridState.length; i++) {
-        if (newGridState[i][newGridState[0].length - 1 - i].value !== symbol) {
+      for (let i = 0; i < state.length; i++) {
+        if (state[i][state[0].length - 1 - i].value !== symbol) {
           winnerDiagRightLeft = winnerDiagRightLeft && false;
         }
       }
 
       if (winnerDiagRightLeft) {
-        return newGridState.map((gridRow, i) => {
+        return state.map((gridRow, i) => {
           return gridRow.map((cell, j, gridRow) => {
             if (j === gridRow.length - 1 - i) {
               return { ...cell, winner: true, locked: true };
@@ -114,7 +111,7 @@ const gridReducer = (state = [], action) => {
         });
       }
 
-      return newGridState;
+      return state;
     default:
       return state;
   }
